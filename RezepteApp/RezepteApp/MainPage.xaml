@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RezepteApp"
+             xmlns:i18N="clr-namespace:RezepteApp.i18n"
+             x:Class="RezepteApp.MainPage"
+             Padding="{StaticResource PagePadding}"
+             Title="{i18N:Translation AppTitle}">
+
+    <StackLayout>
+        <Label Text="{i18N:Translation Xyz}" />
+        <Label Text="{i18N:Translation LabelZutat}" />
+        <Entry />
+        <Label Text="{i18N:Translation LabelMenge}" />
+        <Entry Keyboard="Numeric" />
+        <Label Text="{i18N:Translation LabelHandlung}" />
+        <Editor VerticalOptions="FillAndExpand" />
+    </StackLayout>
+
+</ContentPage>
