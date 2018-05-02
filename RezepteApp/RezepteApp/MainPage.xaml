@@ -7,14 +7,17 @@
              Padding="{StaticResource PagePadding}"
              Title="{i18N:Translation AppTitle}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
-        <Label Text="{i18N:Translation Xyz}" />
         <Label Text="{i18N:Translation LabelZutat}" />
-        <Entry />
+        <Entry Text="{Binding Zutat}" />
         <Label Text="{i18N:Translation LabelMenge}" />
-        <Entry Keyboard="Numeric" />
+        <Entry Keyboard="Numeric" Text="{Binding Menge}" />
         <Label Text="{i18N:Translation LabelHandlung}" />
-        <Editor VerticalOptions="FillAndExpand" />
+        <Editor VerticalOptions="FillAndExpand" Text="{Binding Zutat}" />
     </StackLayout>
 
 </ContentPage>

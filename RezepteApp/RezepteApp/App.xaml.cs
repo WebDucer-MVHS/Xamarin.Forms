@@ -1,4 +1,5 @@
 ﻿using RezepteApp.i18n;
+using RezepteApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,15 @@ namespace RezepteApp
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new RezepteApp.MainPage());
+			MainPage = new NavigationPage(new RezepteApp.MainPage
+            {
+                BindingContext = new MainViewModel
+                {
+                    Zutat = "Zitrone",
+                    Menge = 5.3,
+                    ArbeitsSchritte = "Schritt 1"
+                }
+            });
 		}
 
 		protected override void OnStart ()
