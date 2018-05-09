@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18N="clr-namespace:RezepteApp.i18n"
+             Title="{i18N:Translation AppTitle}"
+             Padding="{StaticResource PagePadding}"
+             x:Class="RezepteApp.Views.ReceiptListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar Text="{Binding SearchTerm}"
+                       SearchCommand="{Binding SearchCommand}"
+                       Placeholder="{i18N:Translation SearchMin3}"/>
+            <ListView ItemsSource="{Binding ReceiptList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <SwitchCell Text="{Binding Title}"
+                                    On="{Binding IsFavorit}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -95,5 +95,14 @@ namespace RezepteApp.i18n {
                 return ResourceManager.GetString("LabelZutat", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please enter at least 3 characters ähnelt.
+        /// </summary>
+        internal static string SearchMin3 {
+            get {
+                return ResourceManager.GetString("SearchMin3", resourceCulture);
+            }
+        }
     }
 }

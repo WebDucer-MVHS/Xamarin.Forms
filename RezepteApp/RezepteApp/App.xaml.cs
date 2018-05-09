@@ -20,14 +20,9 @@ namespace RezepteApp
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new RezepteApp.MainPage
+			MainPage = new NavigationPage(new Views.ReceiptListPage()
             {
-                BindingContext = new MainViewModel
-                {
-                    Zutat = "Zitrone",
-                    Menge = 5.3,
-                    ArbeitsSchritte = "Schritt 1"
-                }
+                BindingContext = new ViewModels.ReceiptListViewModel()
             });
 		}
 

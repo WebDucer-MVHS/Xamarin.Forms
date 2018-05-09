@@ -129,4 +129,7 @@
   <data name="LabelZutat" xml:space="preserve">
     <value>Ingredient:</value>
   </data>
+  <data name="SearchMin3" xml:space="preserve">
+    <value>Please enter at least 3 characters</value>
+  </data>
 </root>

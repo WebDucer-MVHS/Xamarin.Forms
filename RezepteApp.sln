@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RezepteApp.iOS", "RezepteAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RezepteApp.UWP", "RezepteApp\RezepteApp.UWP\RezepteApp.UWP.csproj", "{73D6CC12-6517-43F3-9A45-66C91526F4F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RezepteApp", "RezepteApp\RezepteApp\RezepteApp.csproj", "{FE3A1FC9-2532-492A-8123-1F99743496A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RezepteApp", "RezepteApp\RezepteApp\RezepteApp.csproj", "{FE3A1FC9-2532-492A-8123-1F99743496A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

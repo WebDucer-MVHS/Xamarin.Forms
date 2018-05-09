@@ -126,4 +126,7 @@
   <data name="LabelZutat" xml:space="preserve">
     <value>Zutat:</value>
   </data>
+  <data name="SearchMin3" xml:space="preserve">
+    <value>Bitte min. 3 Zeichen eingeben</value>
+  </data>
 </root>
