@@ -1,4 +1,7 @@
-﻿using RezepteApp.i18n;
+﻿using Prism.Ioc;
+using RezepteApp.i18n;
+using RezepteApp.Services;
+using RezepteApp.Services.Fakes;
 using RezepteApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,31 +17,40 @@ using Xamarin.Forms.Xaml;
 
 namespace RezepteApp
 {
-	public partial class App : Application
+	public partial class App : Prism.DryIoc.PrismApplication
 	{
 		public App ()
 		{
-			InitializeComponent();
-
-			MainPage = new NavigationPage(new Views.ReceiptListPage()
-            {
-                BindingContext = new ViewModels.ReceiptListViewModel()
-            });
+			
 		}
 
-		protected override void OnStart ()
-		{
-			// Handle when your app starts
-		}
+        // Registrierung der navigation und der Services
+        protected override void RegisterTypes(IContainerRegistry container)
+        {
+            // Navigation
+            container.RegisterForNavigation<NavigationPage>();
+            container.RegisterForNavigation<Views.ReceiptListPage, ReceiptListViewModel>();
 
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+            // Service
+            container.Register<IReceiptRepo, FakeReceiptRepo>();
+        }
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-	}
+        protected override void OnInitialized()
+        {
+            InitializeComponent();
+
+            // String interpolation
+            NavigationService.NavigateAsync(
+                $"{nameof(NavigationPage)}/{nameof(Views.ReceiptListPage)}");
+
+            //NavigationService.NavigateAsync(
+            //    string.Format("{0}/{1}", nameof(NavigationPage), nameof(Views.ReceiptListPage)
+            //    ));
+
+            //MainPage = new NavigationPage(new Views.ReceiptListPage()
+            //{
+            //    BindingContext = new ViewModels.ReceiptListViewModel(new FakeReceiptRepo())
+            //});
+        }
+    }
 }
