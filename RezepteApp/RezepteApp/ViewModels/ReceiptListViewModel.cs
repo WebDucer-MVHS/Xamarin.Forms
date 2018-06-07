@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Navigation;
 using RezepteApp.Models;
 using RezepteApp.Services;
 using System;
@@ -10,41 +11,21 @@ using System.Threading.Tasks;
 
 namespace RezepteApp.ViewModels
 {
-    public class ReceiptListViewModel : BindableBase
+    public class ReceiptListViewModel : BindableBase, INavigatedAware
     {
         private readonly IReceiptRepo _repo;
+        private readonly INavigationService _navService;
 
-        public ReceiptListViewModel(IReceiptRepo repo)
+        public ReceiptListViewModel(IReceiptRepo repo, INavigationService navigationService)
         {
             // Initialisierung des Repositories
             _repo = repo;
+            _navService = navigationService;
 
             SearchCommand = new DelegateCommand(async () => await Search());
             SearchCommand.ObservesProperty(() => SearchTerm);
 
-            ReceiptList = new List<Receipt>
-            {
-                new Receipt
-                {
-                    Title = "Rezept 1",
-                    IsFavorit = false
-                },
-                new Receipt
-                {
-                    Title = "Rezept 2",
-                    IsFavorit = false
-                },
-                new Receipt
-                {
-                    Title = "Rezept 3",
-                    IsFavorit = true
-                },
-                new Receipt
-                {
-                    Title = "Rezept 4",
-                    IsFavorit = false
-                }
-            };
+            AddNewCommand = new DelegateCommand(async () => await AddNew());
         }
 
         private string _searchTerm;
@@ -89,43 +70,41 @@ namespace RezepteApp.ViewModels
             IsLoading = false;
         }
 
-        //private Task Search()
-        //{
-        //    // Prüfen, dass die Suche durchgeführt werden darf
-        //    if ((SearchTerm?.Length ?? 0) < 3)
-        //    {
-        //        return Task.CompletedTask;
-        //    }
+        public void OnNavigatedFrom(NavigationParameters parameters)
+        {
+            // Not needed
+        }
 
-        //    return _repo.FindReceiptsAsync(SearchTerm)
-        //        .ContinueWith(t =>
-        //        {
-        //            ReceiptList = t.Result.ToList();
-        //        }, TaskScheduler.FromCurrentSynchronizationContext);
-        //}
+        public void OnNavigatedTo(NavigationParameters parameters)
+        {
+            // Laden der Daten
+            LoadData();
+        }
 
-        //private void Search()
-        //{
-        //    // Prüfen, dass die Suche durchgeführt werden darf
-        //    if ((SearchTerm?.Length ?? 0) < 3)
-        //    {
-        //        return;
-        //    }
+        private async Task LoadData()
+        {
+            IsLoading = true;
 
-        //    // Möglicher Deadlock
-        //    //var receipts = _repo.FindReceiptsAsync(SearchTerm).Result;
+            var favorites = await _repo.GetFavoritesAsync();
 
-        //    // Teuere Lösung
-        //    var receipts = Task.Run(async () => await _repo.FindReceiptsAsync(SearchTerm)).Result;
+            ReceiptList = favorites.ToList();
 
-        //    ReceiptList = receipts.ToList();
-        //}
+            IsLoading = false;
+        }
 
         private List<Receipt> _receiptList;
         public List<Receipt> ReceiptList
         {
             get => _receiptList;
             set => SetProperty(ref _receiptList, value);
+        }
+
+        public DelegateCommand AddNewCommand { get; }
+
+        private async Task AddNew()
+        {
+            // Navigierenzu Details
+            await _navService.NavigateAsync(nameof(MainPage));
         }
     }
 }

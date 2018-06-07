@@ -5,6 +5,9 @@
              Title="{i18N:Translation AppTitle}"
              Padding="{StaticResource PagePadding}"
              x:Class="RezepteApp.Views.ReceiptListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{i18N:Translation AddButton}" Command="{Binding AddNewCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Text="{Binding SearchTerm}"

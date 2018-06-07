@@ -30,6 +30,7 @@ namespace RezepteApp
             // Navigation
             container.RegisterForNavigation<NavigationPage>();
             container.RegisterForNavigation<Views.ReceiptListPage, ReceiptListViewModel>();
+            container.RegisterForNavigation<MainPage, MainViewModel>();
 
             // Service
             container.Register<IReceiptRepo, FakeReceiptRepo>();

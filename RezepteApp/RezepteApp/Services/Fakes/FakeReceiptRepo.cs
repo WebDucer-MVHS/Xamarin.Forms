@@ -23,9 +23,33 @@ namespace RezepteApp.Services.Fakes
             };
         }
 
-        public Task<IEnumerable<Receipt>> GetFavoritesAsync()
+        public async Task<IEnumerable<Receipt>> GetFavoritesAsync()
         {
-            throw new NotImplementedException();
+            await Task.Delay(TimeSpan.FromSeconds(1.5));
+
+            return new List<Receipt>
+            {
+                new Receipt
+                {
+                    Title = "Rezept 1",
+                    IsFavorit = true
+                },
+                new Receipt
+                {
+                    Title = "Rezept 2",
+                    IsFavorit = true
+                },
+                new Receipt
+                {
+                    Title = "Rezept 3",
+                    IsFavorit = true
+                },
+                new Receipt
+                {
+                    Title = "Rezept 4",
+                    IsFavorit = true
+                }
+            };
         }
     }
 }
