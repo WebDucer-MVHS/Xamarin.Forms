@@ -18,6 +18,11 @@ namespace RezepteApp.ViewModels
 
         public ReceiptListViewModel(IReceiptRepo repo, INavigationService navigationService)
         {
+            if (repo == null)
+            {
+                throw new ArgumentNullException(nameof(repo));
+            }
+
             // Initialisierung des Repositories
             _repo = repo;
             _navService = navigationService;

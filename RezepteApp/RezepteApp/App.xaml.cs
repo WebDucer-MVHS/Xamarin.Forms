@@ -1,4 +1,5 @@
 ﻿using Prism.Ioc;
+using RezepteApp.DB;
 using RezepteApp.i18n;
 using RezepteApp.Services;
 using RezepteApp.Services.Fakes;
@@ -33,7 +34,9 @@ namespace RezepteApp
             container.RegisterForNavigation<MainPage, MainViewModel>();
 
             // Service
-            container.Register<IReceiptRepo, FakeReceiptRepo>();
+            //container.Register<IReceiptRepo, FakeReceiptRepo>();
+            container.Register<IReceiptRepo, DbReceiptRepo>();
+            container.Register<ReceiptContext>();
         }
 
         protected override void OnInitialized()
