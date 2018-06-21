@@ -31,6 +31,8 @@ namespace RezepteApp.ViewModels
             SearchCommand.ObservesProperty(() => SearchTerm);
 
             AddNewCommand = new DelegateCommand(async () => await AddNew());
+
+            EditCommand = new DelegateCommand<Receipt>(async receipt => await Edit(receipt));
         }
 
         private string _searchTerm;
@@ -90,9 +92,14 @@ namespace RezepteApp.ViewModels
         {
             IsLoading = true;
 
-            var favorites = await _repo.GetFavoritesAsync();
-
-            ReceiptList = favorites.ToList();
+            try
+            {
+                var favorites = await _repo.GetFavoritesAsync();
+                ReceiptList = favorites.ToList();
+            } catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
 
             IsLoading = false;
         }
@@ -110,6 +117,25 @@ namespace RezepteApp.ViewModels
         {
             // Navigierenzu Details
             await _navService.NavigateAsync(nameof(MainPage));
+        }
+
+        public DelegateCommand<Receipt> EditCommand { get; }
+
+        private async Task Edit(Receipt receipt)
+        {
+            // Navigeieren zu details
+            NavigationParameters parameter = new NavigationParameters();
+            parameter.Add("ID", receipt.Id);
+            await _navService.NavigateAsync(nameof(MainPage), parameter);
+        }
+
+        public Receipt Receipt
+        {
+            get => null;
+            set
+            {
+                Edit(value);
+            }
         }
     }
 }

@@ -13,7 +13,8 @@
             <SearchBar Text="{Binding SearchTerm}"
                        SearchCommand="{Binding SearchCommand}"
                        Placeholder="{i18N:Translation SearchMin3}"/>
-            <ListView ItemsSource="{Binding ReceiptList}">
+            <ListView ItemsSource="{Binding ReceiptList}"
+                      SelectedItem="{Binding Receipt}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <SwitchCell Text="{Binding Title}"

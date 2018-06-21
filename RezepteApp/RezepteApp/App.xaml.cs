@@ -1,4 +1,5 @@
-﻿using Prism.Ioc;
+﻿using DryIoc;
+using Prism.Ioc;
 using RezepteApp.DB;
 using RezepteApp.i18n;
 using RezepteApp.Services;
@@ -6,6 +7,7 @@ using RezepteApp.Services.Fakes;
 using RezepteApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Resources;
 using System.Text;
@@ -20,6 +22,11 @@ namespace RezepteApp
 {
 	public partial class App : Prism.DryIoc.PrismApplication
 	{
+        public App(Prism.IPlatformInitializer initializer) : base(initializer)
+        {
+
+        }
+
 		public App ()
 		{
 			
@@ -43,18 +50,38 @@ namespace RezepteApp
         {
             InitializeComponent();
 
+            // Init Database
+            InitDatabse();
+
             // String interpolation
             NavigationService.NavigateAsync(
                 $"{nameof(NavigationPage)}/{nameof(Views.ReceiptListPage)}");
+        }
 
-            //NavigationService.NavigateAsync(
-            //    string.Format("{0}/{1}", nameof(NavigationPage), nameof(Views.ReceiptListPage)
-            //    ));
+        private void InitDatabse()
+        {
+            try
+            {
+                using (var db = Container.Resolve<ReceiptContext>())
+                {
+                    db.Database.EnsureCreated();
+                }
 
-            //MainPage = new NavigationPage(new Views.ReceiptListPage()
-            //{
-            //    BindingContext = new ViewModels.ReceiptListViewModel(new FakeReceiptRepo())
-            //});
+                // Ohne Using
+                var db2 = Container.Resolve<ReceiptContext>();
+                db2.Database.EnsureCreated();
+                db2.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        protected override Rules CreateContainerRules()
+        {
+            return base.CreateContainerRules()
+                .WithoutThrowOnRegisteringDisposableTransient();
         }
     }
 }

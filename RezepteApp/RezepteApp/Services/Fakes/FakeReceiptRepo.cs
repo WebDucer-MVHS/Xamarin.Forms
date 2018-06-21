@@ -51,5 +51,10 @@ namespace RezepteApp.Services.Fakes
                 }
             };
         }
+
+        public Task<Receipt> GetReceiptByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

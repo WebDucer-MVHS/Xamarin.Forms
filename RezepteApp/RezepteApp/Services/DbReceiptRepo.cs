@@ -36,5 +36,12 @@ namespace RezepteApp.Services
                 .Where(w => w.IsFavorit)
                 .ToListAsync();
         }
+
+        public Task<Receipt> GetReceiptByIdAsync(int id)
+        {
+            return _context
+                .Receipts
+                .FindAsync(id);
+        }
     }
 }

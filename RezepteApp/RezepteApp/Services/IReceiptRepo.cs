@@ -11,5 +11,6 @@ namespace RezepteApp.Services
         Task<IEnumerable<Receipt>> GetFavoritesAsync();
 
         Task<IEnumerable<Receipt>> FindReceiptsAsync(string searchTerm);
+        Task<Receipt> GetReceiptByIdAsync(int id);
     }
 }
