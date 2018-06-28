@@ -33,6 +33,11 @@ namespace RezepteApp.DB.Mappings
                 .HasColumnName("favorite")
                 .HasDefaultValue(false)
                 .ValueGeneratedNever();
+            builder.Property(t => t.Rating)
+                .HasColumnName("rating")
+                .IsRequired()
+                .HasDefaultValue(0)
+                .ValueGeneratedNever();
         }
     }
 }

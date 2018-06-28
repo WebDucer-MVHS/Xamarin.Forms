@@ -12,6 +12,12 @@ namespace RezepteApp.DB
     {
         private readonly string _dbPath;
 
+        // Constructor wird nur für Migrationen genutzt
+        public ReceiptContext()
+        {
+            _dbPath = "Migration.db";
+        }
+
         public ReceiptContext(IPathService pathService)
         {
             _dbPath = pathService.GetDbPath("receipts.db");

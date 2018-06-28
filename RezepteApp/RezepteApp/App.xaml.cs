@@ -1,4 +1,5 @@
 ﻿using DryIoc;
+using Microsoft.EntityFrameworkCore;
 using Prism.Ioc;
 using RezepteApp.DB;
 using RezepteApp.i18n;
@@ -64,13 +65,8 @@ namespace RezepteApp
             {
                 using (var db = Container.Resolve<ReceiptContext>())
                 {
-                    db.Database.EnsureCreated();
+                    db.Database.Migrate();
                 }
-
-                // Ohne Using
-                var db2 = Container.Resolve<ReceiptContext>();
-                db2.Database.EnsureCreated();
-                db2.Dispose();
             }
             catch (Exception ex)
             {

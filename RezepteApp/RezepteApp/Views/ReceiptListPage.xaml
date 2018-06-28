@@ -6,7 +6,14 @@
              Padding="{StaticResource PagePadding}"
              x:Class="RezepteApp.Views.ReceiptListPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{i18N:Translation AddButton}" Command="{Binding AddNewCommand}" />
+        <ToolbarItem Text="{i18N:Translation AddButton}" Command="{Binding AddNewCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android,iOS" Value="icon_add_receipt" />
+                    <On Platform="UWP" Value="icon_add_receipt.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

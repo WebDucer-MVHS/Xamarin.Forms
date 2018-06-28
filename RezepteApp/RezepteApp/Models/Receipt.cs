@@ -9,5 +9,6 @@ namespace RezepteApp.Models
         public bool IsFavorit { get; set; } = false;
         public string Ingredient { get; set; }
         public string Steps { get; set; }
+        public int Rating { get; set; } = 0;
     }
 }
