@@ -45,6 +45,7 @@ namespace RezepteApp
             //container.Register<IReceiptRepo, FakeReceiptRepo>();
             container.Register<IReceiptRepo, DbReceiptRepo>();
             container.Register<ReceiptContext>();
+            container.Register<IApiService, ChefkochApiService>();
         }
 
         protected override void OnInitialized()

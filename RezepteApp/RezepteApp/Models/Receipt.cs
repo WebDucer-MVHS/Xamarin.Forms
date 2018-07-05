@@ -10,5 +10,7 @@ namespace RezepteApp.Models
         public string Ingredient { get; set; }
         public string Steps { get; set; }
         public int Rating { get; set; } = 0;
+
+        public string Image { get; set; }
     }
 }

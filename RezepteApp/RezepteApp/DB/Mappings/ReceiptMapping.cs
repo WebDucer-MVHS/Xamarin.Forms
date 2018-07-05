@@ -38,6 +38,8 @@ namespace RezepteApp.DB.Mappings
                 .IsRequired()
                 .HasDefaultValue(0)
                 .ValueGeneratedNever();
+
+            builder.Ignore(t => t.Image);
         }
     }
 }

@@ -21,11 +21,17 @@
                        SearchCommand="{Binding SearchCommand}"
                        Placeholder="{i18N:Translation SearchMin3}"/>
             <ListView ItemsSource="{Binding ReceiptList}"
-                      SelectedItem="{Binding Receipt}">
+                      SelectedItem="{Binding Receipt}"
+                      HasUnevenRows="True"
+                      RefreshCommand="{Binding SearchCommand}"
+                      IsRefreshing="{Binding IsLoading}"
+                      IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <SwitchCell Text="{Binding Title}"
-                                    On="{Binding IsFavorit}"/>
+                        <ImageCell Text="{Binding Title}"
+                                   ImageSource="{Binding Image}" />
+                        <!--<SwitchCell Text="{Binding Title}"
+                                    On="{Binding IsFavorit}"/>-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

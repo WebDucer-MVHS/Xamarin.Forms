@@ -15,8 +15,10 @@ namespace RezepteApp.ViewModels
     {
         private readonly IReceiptRepo _repo;
         private readonly INavigationService _navService;
+        private readonly IApiService _apiService;
 
-        public ReceiptListViewModel(IReceiptRepo repo, INavigationService navigationService)
+        public ReceiptListViewModel(IReceiptRepo repo, INavigationService navigationService,
+            IApiService apiService)
         {
             if (repo == null)
             {
@@ -26,7 +28,7 @@ namespace RezepteApp.ViewModels
             // Initialisierung des Repositories
             _repo = repo;
             _navService = navigationService;
-
+            _apiService = apiService;
             SearchCommand = new DelegateCommand(async () => await Search());
             SearchCommand.ObservesProperty(() => SearchTerm);
 
@@ -70,9 +72,14 @@ namespace RezepteApp.ViewModels
                 return;
             }
 
-            var receipts = await _repo.FindReceiptsAsync(SearchTerm);
+            //var receipts = await _repo.FindReceiptsAsync(SearchTerm);
 
-            ReceiptList = receipts.ToList();
+            // Daten aus dem WebService
+            var receipts = await _apiService.SearchReceiptsAsync(SearchTerm);
+
+            ReceiptList = receipts
+                .Select(s => new Receipt { Title = s.RezeptName, Image = s.RezeptBild })
+                .ToList();
 
             IsLoading = false;
         }
